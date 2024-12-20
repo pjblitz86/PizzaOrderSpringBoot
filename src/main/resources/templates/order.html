@@ -1,21 +1,40 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Orders</title>
+    <meta charset="UTF-8">
+    <title>Užsakymo informacija</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
-	<h1>Užsakymo informacija</h1>
-	<table>
-	    <tr>
-	        <th>Vardas</th>
-	        <th>Kaina</th>
-	    </tr>
-	    <tr th:each="pizza : ${order.pizzas}">
-	        <td th:text="${pizza.name}"></td>
-	        <td th:text="${pizza.price}"></td>
-	    </tr>
-	</table>
-	<p>Bendra kaina: <span th:text="${order.totalPrice}"></span></p>
+    <div class="container">
+        <h1>Jūsų užsakymas</h1>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Vardas</th>
+                    <th>Aprašymas</th>
+                    <th>Kaina</th>
+                    <th>Veiksmai</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="pizza : ${order.pizzas}">
+                    <td th:text="${pizza.name}"></td>
+                    <td th:text="${pizza.description}"></td>
+                    <td th:text="${pizza.price}"></td>
+                    <td>
+                        <!-- Pašalinimo mygtukas -->
+                        <form th:action="@{/order/{orderId}/removePizza/{pizzaId}(orderId=${order.id}, pizzaId=${pizza.id})}" method="post">
+                            <button type="submit">Pašalinti</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <p><strong>Bendra kaina: </strong><span th:text="${order.totalPrice}"></span></p>
+        <a href="/orders">Peržiūrėti visus užsakymus</a>
+    </div>
 </body>
 </html>

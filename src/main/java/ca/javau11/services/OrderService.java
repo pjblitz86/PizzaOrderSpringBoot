@@ -50,6 +50,21 @@ public class OrderService {
 
         return order;
     }
+	
+	public void removePizzaFromOrder(Long orderId, Long pizzaId) {
+	    Order order = orders.stream()
+	            .filter(o -> o.getId().equals(orderId))
+	            .findFirst()
+	            .orElseThrow(() -> new IllegalArgumentException("Order with ID " + orderId + " not found"));
+
+	    Pizza pizzaToRemove = order.getPizzas().stream()
+	            .filter(p -> p.getId().equals(pizzaId))
+	            .findFirst()
+	            .orElseThrow(() -> new IllegalArgumentException("Pizza with ID " + pizzaId + " not found in the order"));
+
+	    order.getPizzas().remove(pizzaToRemove);
+	    order.setTotalPrice(calculateTotalPrice(order.getPizzas()));
+	}
 
 	private Order findExistingOrder() {
         return orders.isEmpty() ? null : orders.get(0);

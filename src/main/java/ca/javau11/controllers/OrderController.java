@@ -3,6 +3,7 @@ package ca.javau11.controllers;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,6 +39,10 @@ public class OrderController {
 		
 	}
 	
-	
+	@DeleteMapping("/{orderId}/removePizza/{pizzaId}")
+    public ResponseEntity<Void> removePizzaFromOrder(@PathVariable Long orderId, @PathVariable Long pizzaId) {
+        orderService.removePizzaFromOrder(orderId, pizzaId);
+        return ResponseEntity.ok().build();
+    }
 	
 }

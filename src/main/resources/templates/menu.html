@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Pizza Menu</title>
+<link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+	<div class="container">
+        <h1>Picerijos Meniu</h1>
+        
+        <form th:action="@{/createOrder}" method="post">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Vardas</th>
+                        <th>Aprašymas</th>
+                        <th>Kaina</th>
+                        <th>Pridėti į užsakymą</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="pizza : ${pizzas}">
+                        <td th:text="${pizza.name}"></td>
+                        <td th:text="${pizza.description}"></td>
+                        <td th:text="${pizza.price}"></td>
+                        <td>
+                            <!-- Picas pridedame į užsakymą -->
+                            <input type="checkbox" name="pizzaIds" th:value="${pizza.id}" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="submit">Sukurti užsakymą</button>
+        </form>
+    </div>
+</body>
+</html>

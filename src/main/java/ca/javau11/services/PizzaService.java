@@ -2,6 +2,7 @@ package ca.javau11.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -25,4 +26,15 @@ public class PizzaService {
 		return pizza;
 	}
 	
+	public Optional<Pizza> getPizzaById(Long id) {
+        return pizzas.stream().filter(pizza -> pizza.getId().equals(id)).findFirst();
+    }
+	
+	public List<Pizza> getPizzasByIds(List<Long> pizzaIds) {
+        List<Pizza> selectedPizzas = new ArrayList<>();
+        for (Long id : pizzaIds) {
+            getPizzaById(id).ifPresent(selectedPizzas::add);
+        }
+        return selectedPizzas;
+    }
 }
