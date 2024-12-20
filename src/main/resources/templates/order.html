@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Orders</title>
+</head>
+<body>
+	<h1>Užsakymo informacija</h1>
+	<table>
+	    <tr>
+	        <th>Vardas</th>
+	        <th>Kaina</th>
+	    </tr>
+	    <tr th:each="pizza : ${order.pizzas}">
+	        <td th:text="${pizza.name}"></td>
+	        <td th:text="${pizza.price}"></td>
+	    </tr>
+	</table>
+	<p>Bendra kaina: <span th:text="${order.totalPrice}"></span></p>
+</body>
+</html>

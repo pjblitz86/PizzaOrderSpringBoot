@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Pizza Menu</title>
+</head>
+<body>
+	<h1>All the Pizzas</h1>
+	
+		<ol>
+			<li th:each="pizza : ${pizzas}" 
+			    th:text="${pizza.name} + ' ' + ${pizza.description} + ' - Price: €' + ${pizza.price}">
+			</li>
+		</ol>
+
+</body>
+</html>
